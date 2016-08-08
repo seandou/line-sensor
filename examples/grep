@@ -1,0 +1,17 @@
+#!/usr/bin/env node
+
+var sensor = require('./../lib/');
+
+var str = process.argv[2];
+
+if (!str) {
+  console.log('require an argument');
+  process.exit(1);
+}
+
+var pipe = sensor(process.stdin);
+pipe.on('line', function(line) {
+  if (line && line.indexOf(str) != -1) {
+    console.log(line);
+  }
+});
